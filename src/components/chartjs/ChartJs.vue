@@ -27,8 +27,9 @@ export default {
 
 <style lang="scss" scoped>
   .chart-container {
-    max-width: 600px;
-    // max-height: 200px;
+   width: 60%;
+    background-color: white;
+    margin-left:40px;
   }
 
 </style>
