@@ -17,8 +17,8 @@ export default {
 
   methods: {
     onClick (color, index) {
-      this.$root.$emit('close-color-picker')
-      this.$root.$emit('data-color-picker', `#${color}`)
+      this.$eventBus.$emit('close-color-picker')
+      this.$eventBus.$emit('data-color-picker', `#${color}`)
       this.activeItem = index
       setTimeout(() => {
         this.activeItem = null

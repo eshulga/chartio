@@ -111,7 +111,7 @@ export default {
   },
 
   mounted () {
-    this.$root.$on('close-color-picker', this.closeColorPicker)
+    this.$eventBus.$on('close-color-picker', this.closeColorPicker)
   },
 
   methods: {
