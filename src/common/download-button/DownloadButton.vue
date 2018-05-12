@@ -1,38 +1,27 @@
 <template>
-    <button @click='jsToPdf'><img src="../../assets/img/download-btn-icon.png" alt="">Download PDF</button>
-    
+<button @click='jsToPdf'><img src="../../assets/img/download-btn-icon.png" alt="">Download PDF</button>
 </template>
 
 <script>
-import jsPDF from 'jsPDF'
+import JsPDF from 'jsPDF'
 
 export default {
-    name: 'DownloadButton',
-    data(){
-        return{
-            
-        }
-    },
-    methods:{
-        jsToPdf(){
-            let pdfName = 'test'; 
-            var doc = new jsPDF();
-            doc.text("Hello World!", 10, 10);
-            doc.save(pdfName + '.pdf');
-            console.log("CLICK!")
-        }
+  name: 'DownloadButton',
+  data () {
+    return {
     }
+  },
+  methods: {
+    jsToPdf () {
+      let pdfName = 'test'
+      var doc = new JsPDF()
+      doc.text('Hello World!', 10, 10)
+      doc.save(pdfName + '.pdf')
+      console.log('CLICK!')
+    }
+  }
 
 }
-
-
-
-
-
-
-
-
-
 
 </script>
 
@@ -52,6 +41,4 @@ button{
 img{
     margin: 10px 20px 10px 10px;
 }
-
-
 </style>

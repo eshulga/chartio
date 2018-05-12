@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <h1>Table-area</h1>
-    <download-button/>
+    <download-button />
   </div>
 </template>
 
@@ -13,8 +13,8 @@ export default {
     return {
     }
   },
-  components:{
-  	DownloadButton
+  components: {
+    DownloadButton
   }
 }
 </script>
