@@ -7,7 +7,7 @@ import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 
-import App from './components/App/App.vue'
+import App from './app/App.vue'
 import router from './router'
 import config from './config'
 
