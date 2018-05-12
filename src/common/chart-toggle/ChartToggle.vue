@@ -24,8 +24,10 @@ export default {
   },
   methods: {
     clicked: function (event) {
+      event.stopImmediatePropagation()
       var sibl = this.getSiblings(event.target)
       event.target.classList.add('active')
+      event.target.classList.add('ripple')
       sibl.forEach((item) => {
         return item.classList.remove('active')
       })
@@ -69,7 +71,8 @@ export default {
     display: flex;
     border: 2px solid #ff5722;
     height: 75px;
-    width: 130px;
+    max-width: 130px;
+    width: 100%;
     background: #fff;
     outline: none;
     cursor: pointer;
@@ -106,6 +109,35 @@ export default {
     svg {
       color: #fff;
     }
+  }
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgb(255, 255, 255) 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10,10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+  }
+
+  &:active:after {
+    transform: scale(0,0);
+    opacity: .2;
+    transition: 0s;
   }
 }
 
