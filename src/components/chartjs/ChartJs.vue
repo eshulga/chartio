@@ -1,9 +1,9 @@
 <template>
   <div class="chart-container">
-    <bar-chart :height="200" />
-    <line-chart :height="200" />
-    <pie-chart :height="200" />
-    <don-chart :height="200" />
+    <bar-chart :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
+    <line-chart :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
+    <pie-chart :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
+    <don-chart :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
   </div>
 </template>
 
@@ -16,11 +16,24 @@ import DonChart from '../../common/charjs/DoughuntChart.vue'
 export default {
   data () {
     return {
-
+      currentChart: 'bar'
     }
   },
   components: {
     BarChart, LineChart, PieChart, DonChart
+  },
+  methods: {
+    // changeChart () {
+    //   console.log(this)
+    // }
+  },
+  mounted () {
+    this.$eventBus.$on('toggleCharts', (args) => {
+      this.currentChart = args
+    })
+  },
+  beforeUpdate () {
+
   }
 }
 </script>
@@ -29,6 +42,14 @@ export default {
   .chart-container {
     max-width: 600px;
     // max-height: 200px;
+  }
+
+  .valid {
+    display: block;
+  }
+
+  .invalid {
+    display: none;
   }
 
 </style>
