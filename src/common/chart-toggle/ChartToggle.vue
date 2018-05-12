@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <button class="disabled" @click="clicked">
+        <button class="disabled" @click="clicked" >
         <font-awesome-icon icon="chart-bar" size="3x" />Bar chart</button>
         <button class="disabled" @click="clicked">
         <font-awesome-icon icon="chart-line" size="2x" />Line chart</button>

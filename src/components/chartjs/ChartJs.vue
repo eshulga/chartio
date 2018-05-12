@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-<template>
-    <div>
-      <router-view></router-view>
-    </div>
-</template>
-
-<script>
-
-export default {
-  name: 'Chart',
-  data(){
-    return{
-      
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-
-
-</style>
-=======
 <template>
   <div class="chart-container">
     <bar-chart :height="200" />
@@ -56,4 +32,3 @@ export default {
   }
 
 </style>
->>>>>>> dev
