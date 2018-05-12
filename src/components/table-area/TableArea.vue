@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1>Privet</h1>
+    <h1>Table-area</h1>
   </div>
 </template>
 
