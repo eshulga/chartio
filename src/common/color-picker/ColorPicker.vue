@@ -1,6 +1,6 @@
 <template>
     <div>
-
+      
     </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: 'ColorPicker',
   data(){
     return{
-
+      
     }
   }
 }
