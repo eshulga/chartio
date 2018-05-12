@@ -1,6 +1,8 @@
 <template>
     <div class="area">
-      <div class="area__item" v-for="color in colors" :key="color.id" :style="'bacground-color: #' + color">     
+
+      <div class="area__item" v-for="color in colors" :key="color.id" :style="'background-color: #' + color">
+             
       </div> 
     </div>
 </template>
@@ -19,6 +21,9 @@ export default {
 
 <style lang="scss" scoped>
   .area{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 16px;
     width: 384px;
     height: 134px;
