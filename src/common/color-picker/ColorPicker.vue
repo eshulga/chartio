@@ -14,10 +14,15 @@ export default {
       activeItem: null
     }
   },
+
   methods: {
     onClick (color, index) {
-      this.$root.$emit('close-color-picker', `#${color}`)
+      this.$root.$emit('close-color-picker')
+      this.$root.$emit('data-color-picker', `#${color}`)
       this.activeItem = index
+      setTimeout(() => {
+        this.activeItem = null
+      }, 1000)
     }
   }
 }
@@ -28,15 +33,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 14px;
-    width: 192px;
-    height: 84px;
+    padding: 18px;
+    width: 260px;
+    // height: 84px;
+    background-color: black;
+    opacity: 0.7;
     box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.4);
     &__item{
       position: relative;
-      margin: 2px;
-      width: 16px;
-      height: 16px;
+      margin: 3px;
+      width: 22px;
+      height: 22px;
       cursor: pointer;
     }
     &__item-active{
