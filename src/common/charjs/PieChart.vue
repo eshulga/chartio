@@ -1,21 +1,20 @@
 <script>
 // import VueCharts from 'vue-chartjs'
-import { Pie } from 'vue-chartjs'
+import { Pie, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
 
 export default {
   extends: Pie,
+  mixins: [reactiveProp],
+  props: ['options'],
+  methods: {
+    update () {
+      this.$data._chart.update()
+    }
+  },
   mounted () {
     // Overwriting base render method with actual data.
-    this.renderChart({
-      labels: ['January', 'February', 'March', 'April'],
-      datasets: [
-        {
-          label: 'GitHub Commits',
-          backgroundColor: ['#fff000', '#000000', '#123456', '#654321'],
-          data: [40, 20, 12, 39]
-        }
-      ]
-    })
+    this.renderChart(this.chartData, this.options)
   }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="chart-container">
-    <bar-chart :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
-    <line-chart :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
-    <pie-chart :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
-    <don-chart :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
+    <bar-chart ref="BarChart" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
+    <line-chart ref="LineChart" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
+    <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
+    <don-chart ref="DonChart" :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
   </div>
 </template>
 
@@ -16,18 +16,52 @@ import DonChart from '../../common/charjs/DoughuntChart.vue'
 export default {
   data () {
     return {
-      currentChart: 'bar'
+      render: true,
+      currentChart: 'bar',
+      chartData: {
+        labels: ['март', 'апрель'],
+        datasets: [
+          {
+            label: 'GitHub Commits',
+            backgroundColor: '#fff000',
+            data: [1000, 12000]
+          }
+        ]
+      }
     }
   },
   components: {
     BarChart, LineChart, PieChart, DonChart
   },
   methods: {
-    // changeChart () {
-    //   console.log(this)
-    // }
+    updateData () {
+      this.$refs.BarChart.update()
+      this.$refs.LineChart.update()
+      this.$refs.PieChart.update()
+      this.$refs.DonChart.update()
+    }
   },
   mounted () {
+    this.$eventBus.$on('chartData', (arg) => {
+      this.render = false
+
+      let label = []
+      let dataSet = []
+
+      arg.labels.forEach(element => {
+        label.push(element)
+      })
+
+      arg.data.forEach(element => {
+        dataSet.push(element)
+      })
+
+      this.chartData.labels = label
+      this.chartData.datasets[0].data = dataSet
+
+      this.updateData()
+    })
+
     this.$eventBus.$on('toggleCharts', (args) => {
       this.currentChart = args
     })
