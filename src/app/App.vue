@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <header />
-    <main />
-    <router-view/>
+    <Header />
+    <Main />
   </div>
 </template>
 
 <script>
-import Header from './../components/header/Header.vue'
-import Main from './../components/main/Main.vue'
+import Header from '../components/header/Header.vue'
+import Main from '../components/main/Main.vue'
 
 export default {
+  data () {
+    return {
+    }
+  },
   components: {
     Header, Main
   }

@@ -1,6 +1,6 @@
 
 <script>
-import VueCharts from 'vue-chartjs'
+// import VueCharts from 'vue-chartjs'
 import { Bar } from 'vue-chartjs'
 
 export default {
@@ -20,4 +20,3 @@ export default {
   }
 }
 </script>
-
