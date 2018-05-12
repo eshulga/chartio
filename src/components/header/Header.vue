@@ -1,3 +1,27 @@
+<<<<<<< HEAD
+<template>
+    <div>
+
+    </div>
+</template>
+
+<script>
+
+export default {
+  name: 'Header',
+  data(){
+    return{
+      
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+
+</style>
+=======
 <template>
   <div></div>
 </template>
@@ -14,3 +38,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+>>>>>>> dev
