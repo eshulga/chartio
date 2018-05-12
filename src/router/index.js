@@ -9,10 +9,10 @@ import PieChart from '@/common/charjs/PieChart.vue'
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-        { path: '/', name: 'barChart', component: BarChart },
-        { path: '/', name: 'barChart', component: DoughuntChart },
-        { path: '/', name: 'barChart', component: LineChart },
-        { path: '/', name: 'barChart', component: PieChart }
-    ]
+  routes: [
+    { path: '/', name: 'barChart', component: BarChart },
+    { path: '/', name: 'barChart', component: DoughuntChart },
+    { path: '/', name: 'barChart', component: LineChart },
+    { path: '/', name: 'barChart', component: PieChart }
+  ]
 })
