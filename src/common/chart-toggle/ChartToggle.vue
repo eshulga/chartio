@@ -1,12 +1,12 @@
 <template>
     <div class="row">
-        <button class="disabled" @click="clicked">
+        <button class="ripple" @click="clicked">
         <font-awesome-icon icon="chart-bar" size="3x" v-on:click.stop/>Bar chart</button>
-        <button class="disabled" @click="clicked">
+        <button class="ripple" @click="clicked">
         <font-awesome-icon icon="chart-line" size="3x" v-on:click.stop/>Line chart</button>
-        <button class="disabled" @click="clicked">
+        <button class="ripple" @click="clicked">
         <font-awesome-icon icon="chart-pie" size="3x" v-on:click.stop/>Pie chart</button>
-        <button class="disabled" @click="clicked">
+        <button class="ripple" @click="clicked">
         <font-awesome-icon icon="chart-area" size="3x" v-on:click.stop/>Doughnut chart</button>
     </div>
 </template>
@@ -24,13 +24,13 @@ export default {
   },
   methods: {
     clicked: function (event) {
-      var sibl = this.getSiblings(event.target)
       event.stopImmediatePropagation()
+      var sibl = this.getSiblings(event.target)
       event.target.classList.add('active')
+      event.target.classList.add('ripple')
       sibl.forEach((item) => {
         return item.classList.remove('active')
       })
-      // this.isActive = !this.isActive
     },
     getSiblings: function (elem) {
       var siblings = []
@@ -68,7 +68,8 @@ export default {
     display: flex;
     border: 2px solid #ff5722;
     height: 75px;
-    width: 130px;
+    max-width: 130px;
+    width: 100%;
     background: #fff;
     outline: none;
     cursor: pointer;
@@ -104,6 +105,35 @@ export default {
     svg {
       color: #fff;
     }
+  }
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgb(255, 255, 255) 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10,10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+  }
+
+  &:active:after {
+    transform: scale(0,0);
+    opacity: .2;
+    transition: 0s;
   }
 }
 
