@@ -1,10 +1,21 @@
 <template>
   <div id="app">
-    <app-header />
-    <app-sidebar />
-    <router-view/>
+    <Header />
+    <Main />
   </div>
 </template>
 
-<script src="./App.js"></script>
+<script>
+import Header from '../components/header/Header.vue'
+import Main from '../components/main/Main.vue'
 
+export default {
+  data () {
+    return {
+    }
+  },
+  components: {
+    Header, Main
+  }
+}
+</script>
