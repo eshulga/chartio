@@ -1,14 +1,22 @@
 <template>
     <div class="row">
-        <button class="disabled" @click="clicked($event)">Bar chart</button>
-        <button class="disabled" @click="clicked">Line chart</button>
-        <button class="disabled" @click="clicked">Pie chart</button>
-        <button class="disabled" @click="clicked">Doughnut chart</button>
+        <button class="disabled" @click="clicked">
+        <font-awesome-icon icon="chart-bar" size="3x" />Bar chart</button>
+        <button class="disabled" @click="clicked">
+        <font-awesome-icon icon="chart-line" size="2x" />Line chart</button>
+        <button class="disabled" @click="clicked">
+        <font-awesome-icon icon="chart-pie" size="3x" />Pie chart</button>
+        <button class="disabled" @click="clicked">
+        <font-awesome-icon icon="chart-area" size="3x" />Doughnut chart</button>
     </div>
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { faCoffee } from '@fortawesome/fontawesome-free-solid'
+
 export default {
+  name: 'FAExample',
   data () {
     return {
       isActive: false
@@ -40,6 +48,14 @@ export default {
 
       return siblings
     }
+  },
+  computed: {
+    icon () {
+      return faCoffee
+    }
+  },
+  components: {
+    FontAwesomeIcon
   }
 }
 </script>
