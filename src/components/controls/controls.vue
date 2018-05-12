@@ -1,11 +1,14 @@
 <template>
     <div>
       <table-area/>
+
+      <color-picker></color-picker>
     </div>
 </template>
 <script>
 import TableArea from '../table-area/TableArea.vue'
 
+import ColorPicker from '@/common/color-picker/ColorPicker.vue'
 export default {
   name: 'Controls',
   data () {
@@ -13,7 +16,7 @@ export default {
     }
   },
   components: {
-    TableArea
+    TableArea, ColorPicker
   }
 }
 </script>
