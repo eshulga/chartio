@@ -10,6 +10,11 @@ import ChartJs from '../chartjs/ChartJs.vue'
 import Controls from '../controls/Controls.vue'
 
 export default {
+  data () {
+    return {
+      name: 'main'
+    }
+  },
   components: {
     ChartJs, Controls
   }
