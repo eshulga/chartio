@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <table-area />
 </template>
 <script>
 import TableArea from '../table-area/TableArea.vue'

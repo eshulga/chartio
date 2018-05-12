@@ -1,13 +1,13 @@
 <template>
   <div>
-    <controls />
-    <chart-js />
+    <Controls />
+    <ChartJs />
   </div>
 </template>
 
 <script>
 import ChartJs from '../chartjs/ChartJs.vue'
-import Controls from '../controls/Controls.vue'
+import Controls from '../controls/controls.vue'
 
 export default {
   components: {
