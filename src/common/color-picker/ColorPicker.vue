@@ -19,13 +19,18 @@ export default {
     onClick (item) {
       this.$root.$emit('close-color-picker', `#${item}`)
       const keyItem = this.colors.indexOf(item)
-      this.activeItem[keyItem] = true
+      const activeItems = this.activeItem;
+      activeItems[keyItem] = true;
+      this.activeItem = activeItems;
     }
   },
   watch: {
-    activeItem () {
+    activeItemWatch () {
       console.log('watch')
     }
+  },
+  computed () {
+    this.activeItemWatch = this.activeItem
   }
 }
 </script>

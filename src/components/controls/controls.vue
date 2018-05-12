@@ -3,14 +3,14 @@
       <table-area />
       <chart-toggle />
 
-      <color-picker/>
+      <!-- <color-picker/> -->
     </div>
 </template>
 <script>
 import TableArea from '../table-area/TableArea.vue'
 import ChartToggle from '../../common/chart-toggle/ChartToggle.vue'
 
-import ColorPicker from '@/common/color-picker/ColorPicker.vue'
+// import ColorPicker from '@/common/color-picker/ColorPicker.vue'
 export default {
   name: 'Controls',
   data () {
@@ -18,7 +18,7 @@ export default {
     }
   },
   components: {
-    TableArea, ChartToggle, ColorPicker
+    TableArea, ChartToggle
   }
 }
 </script>
