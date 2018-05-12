@@ -1,12 +1,12 @@
 <template>
     <div class="row">
-        <button class="disabled" @click="clicked" data-type="bar">
+        <button class="ripple" @click="clicked" data-type="bar">
         <font-awesome-icon icon="chart-bar" size="3x" v-on:click.stop/>Bar chart</button>
-        <button class="disabled" @click="clicked" data-type="line">
+        <button class="ripple" @click="clicked" data-type="line">
         <font-awesome-icon icon="chart-line" size="3x" v-on:click.stop/>Line chart</button>
-        <button class="disabled" @click="clicked" data-type="pie">
+        <button class="ripple" @click="clicked" data-type="pie">
         <font-awesome-icon icon="chart-pie" size="3x" v-on:click.stop/>Pie chart</button>
-        <button class="disabled" @click="clicked" data-type="don">
+        <button class="ripple" @click="clicked" data-type="don">
         <font-awesome-icon icon="chart-area" size="3x" v-on:click.stop/>Doughnut chart</button>
     </div>
 </template>
