@@ -1,25 +1,20 @@
 <template>
-  
+    <div></div>
 </template>
 <script>
-
 import TableArea from '../table-area/TableArea.vue'
 
 export default {
   name: 'Controls',
   data () {
-      return {
-
-      }
+    return {
+    }
   },
   components: {
-      TableArea
+    TableArea
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>
-
-
