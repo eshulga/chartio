@@ -1,12 +1,12 @@
 <template>
     <div class="row">
-        <button class="disabled" @click="clicked" >
+        <button class="disabled" @click="clicked" data-type="bar">
         <font-awesome-icon icon="chart-bar" size="3x" />Bar chart</button>
-        <button class="disabled" @click="clicked">
+        <button class="disabled" @click="clicked" data-type="line">
         <font-awesome-icon icon="chart-line" size="2x" />Line chart</button>
-        <button class="disabled" @click="clicked">
+        <button class="disabled" @click="clicked" data-type="pie">
         <font-awesome-icon icon="chart-pie" size="3x" />Pie chart</button>
-        <button class="disabled" @click="clicked">
+        <button class="disabled" @click="clicked" data-type="don">
         <font-awesome-icon icon="chart-area" size="3x" />Doughnut chart</button>
     </div>
 </template>
@@ -25,11 +25,11 @@ export default {
   methods: {
     clicked: function (event) {
       var sibl = this.getSiblings(event.target)
-      event.stopImmediatePropagation()
       event.target.classList.add('active')
       sibl.forEach((item) => {
         return item.classList.remove('active')
       })
+      console.dir(event.target.dataset.type)
       // this.isActive = !this.isActive
     },
     getSiblings: function (elem) {
