@@ -79,6 +79,7 @@ export default {
     color: #757575;
     font-size: 16px;
     padding: 0 10px;
+    margin-bottom: 40px;
     svg {
       margin: 0 10px;
       color: #ff5722;
