@@ -1,4 +1,3 @@
-
 <script>
 // import VueCharts from 'vue-chartjs'
 import { Bar } from 'vue-chartjs'
@@ -12,7 +11,7 @@ export default {
       datasets: [
         {
           label: 'GitHub Commits',
-          backgroundColor: '#f87979',
+          backgroundColor: '#fff000',
           data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
         }
       ]
