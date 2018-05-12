@@ -1,10 +1,12 @@
 <template>
     <div>
-      <table-area/>
+      <table-area />
+      <chart-toggle />
     </div>
 </template>
 <script>
 import TableArea from '../table-area/TableArea.vue'
+import ChartToggle from '../../common/chart-toggle/ChartToggle.vue'
 
 export default {
   name: 'Controls',
@@ -13,7 +15,7 @@ export default {
     }
   },
   components: {
-    TableArea
+    TableArea, ChartToggle
   }
 }
 </script>
