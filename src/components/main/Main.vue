@@ -22,8 +22,9 @@ export default {
 <style lang="scss" >
 .main-page{
   display:flex;
- flex-direction: row;
+  flex-direction: row;
   background-color: #f1f2f2;
   padding: 50px;
+  height: 100%;
 }
 </style>
