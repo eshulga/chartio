@@ -23,7 +23,7 @@ export default {
 .main-page{
   display:flex;
  flex-direction: row;
-  background-color: #d1d3d4;
-  padding: 50px 50px 50px 50px;
+  background-color: #f1f2f2;
+  padding: 50px;
 }
 </style>
