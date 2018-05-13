@@ -69,7 +69,7 @@ export default {
   flex-direction: row;
   button {
     display: flex;
-    border: 2px solid #ff5722;
+    border: 1px solid #ff5722;
     height: 75px;
     max-width: 130px;
     width: 100%;
