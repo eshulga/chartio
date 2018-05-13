@@ -75,7 +75,7 @@ export default {
   padding-left: 80px;
   line-height: 60px;
   font-size: 30px;
-  font-weight: 100;
+  font-weight: 300;
   animation: fade 2.5s;
 }
 
