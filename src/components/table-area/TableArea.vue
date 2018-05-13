@@ -68,11 +68,13 @@
 <script>
 import XLSX from 'xlsx'
 import ColorPicker from '@/common/color-picker/ColorPicker.vue'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { faCoffee } from '@fortawesome/fontawesome-free-solid'
 
 export default {
   name: 'TableArea',
   components: {
-    ColorPicker
+    FontAwesomeIcon, ColorPicker
   },
   data () {
     return {
@@ -95,11 +97,6 @@ export default {
       return faCoffee
     }
   },
-
-  components: {
-    FontAwesomeIcon
-  },
-
   watch: {
     dialog (val) {
       val || this.close()
