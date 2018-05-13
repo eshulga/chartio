@@ -1,13 +1,13 @@
 <template>
     <div class="row">
         <button class="ripple" @click="clicked" data-type="bar">
-        <font-awesome-icon icon="chart-bar" size="3x" v-on:click.stop/>Bar chart</button>
+        <font-awesome-icon icon="chart-bar" size="3x"/>Bar chart</button>
         <button class="ripple" @click="clicked" data-type="line">
-        <font-awesome-icon icon="chart-line" size="3x" v-on:click.stop/>Line chart</button>
+        <font-awesome-icon icon="chart-line" size="3x"/>Line chart</button>
         <button class="ripple" @click="clicked" data-type="pie">
-        <font-awesome-icon icon="chart-pie" size="3x" v-on:click.stop/>Pie chart</button>
+        <font-awesome-icon icon="chart-pie" size="3x"/>Pie chart</button>
         <button class="ripple" @click="clicked" data-type="don">
-        <font-awesome-icon icon="chart-area" size="3x" v-on:click.stop/>Donut chart</button>
+        <font-awesome-icon icon="chart-area" size="3x"/>Donut chart</button>
     </div>
 </template>
 
@@ -19,21 +19,17 @@ export default {
   name: 'FAExample',
   data () {
     return {
-      // isActive: ''
     }
   },
   methods: {
     clicked: function (event) {
-      event.stopImmediatePropagation()
-      var sibl = this.getSiblings(event.target)
-      event.target.classList.add('active')
-      event.target.classList.add('ripple')
+      var sibl = this.getSiblings(event.currentTarget)
+      event.currentTarget.classList.add('active')
+      event.currentTarget.classList.add('ripple')
       sibl.forEach((item) => {
         return item.classList.remove('active')
       })
-      this.$eventBus.$emit('toggleCharts', event.target.dataset.type)
-      console.log(event.target.dataset.type)
-      // this.isActive = !this.isActive
+      this.$eventBus.$emit('toggleCharts', event.currentTarget.dataset.type)
     },
     getSiblings: function (elem) {
       var siblings = []
