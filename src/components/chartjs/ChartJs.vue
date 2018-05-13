@@ -43,6 +43,7 @@ export default {
    width: 60%;
     background-color: white;
     margin-left:40px;
+    box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.15);
   }
 
   .valid {

@@ -7,7 +7,7 @@
         <button class="ripple" @click="clicked" data-type="pie">
         <font-awesome-icon icon="chart-pie" size="3x" v-on:click.stop/>Pie chart</button>
         <button class="ripple" @click="clicked" data-type="don">
-        <font-awesome-icon icon="chart-area" size="3x" v-on:click.stop/>Doughnut chart</button>
+        <font-awesome-icon icon="chart-area" size="3x" v-on:click.stop/>Donut chart</button>
     </div>
 </template>
 
