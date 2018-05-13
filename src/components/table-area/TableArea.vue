@@ -3,7 +3,7 @@
     <v-app id="inspire">
       <div>
         <v-dialog v-model="dialog" max-width="500px" class="data-table">
-          <v-btn outline :loading="loading" :disabled="loading" slot="activator" class="activator mx-auto" color="deep-orange" @click.native="loader = 'loading'">
+          <v-btn v-if="rows.length > 0" outline :loading="loading" :disabled="loading" slot="activator" class="activator mx-auto" color="deep-orange" @click.native="loader = 'loading'">
             Новая запись
           </v-btn>
           <v-card>
@@ -84,6 +84,7 @@ export default {
       editedItem: {},
       defaultItem: {},
       currentColoringId: null,
+      fileName: '',
       loading: null
     }
   },
@@ -110,7 +111,8 @@ export default {
   beforeUpdate () {
     const chartData = {
       labels: [],
-      data: []
+      data: [],
+      name: ''
     }
 
     this.rows.forEach((item) => {
@@ -118,6 +120,8 @@ export default {
       chartData.labels.push(item[keys[0]])
       chartData.data.push(item[keys[1]])
     })
+
+    chartData.name = this.name
 
     this.$eventBus.$emit('chartData', chartData)
   },
@@ -206,7 +210,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>.main {
+<style lang="scss" scoped>
+
+.application {
+  flex-direction: column;
+}
+
+.main {
   position: relative;
   display: flex;
   flex-direction: column;
