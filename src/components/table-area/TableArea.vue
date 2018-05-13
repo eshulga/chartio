@@ -206,7 +206,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>.main {
+<style lang="scss" scoped>
+.main {
   position: relative;
   display: flex;
   flex-direction: column;
