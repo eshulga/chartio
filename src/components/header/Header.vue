@@ -30,9 +30,11 @@ export default {
 }
 
 .logo {
-  width: 300px;
   height: 60px;
   position: relative;
+  left: 50%;
+  display: inline-block;
+  transform: translate(-50%);
   margin: 0 auto;
   padding: 10px 0;
 }
