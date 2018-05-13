@@ -36,6 +36,7 @@ export default {
   @include respond-to(mobile) {
     flex-direction: column;
     align-items: center;
+    padding: 10px;
   }
 }
 </style>

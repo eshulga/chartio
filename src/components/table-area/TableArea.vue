@@ -149,7 +149,8 @@ export default {
           const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]]
           const dataSheet = XLSX.utils.sheet_to_json(firstWorksheet, {header: 1})
           // adding headers
-
+          this.headers = []
+          this.rows = []
           dataSheet[0].forEach((header) => {
             this.headers.push({
               text: '' + header,
@@ -299,6 +300,10 @@ export default {
 
 #inspire {
   padding: 10px;
+
+  @include respond-to(mobile) {
+    padding: 0;
+  }
 }
 
 .activator {

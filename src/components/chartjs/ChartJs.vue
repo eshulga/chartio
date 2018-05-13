@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <button class="button-preview ripple" @click="chartPreview" ><v-icon>fullscreen</v-icon>Full Screen</button>
+    <button class="button-preview ripple" @click="chartPreview" ><v-icon>fullscreen</v-icon><span class="mobile-hide">Full Screen</span></button>
     <bar-chart ref="BarChart" :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
     <line-chart ref="LineChart" :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
     <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
@@ -202,6 +202,12 @@ export default {
   .button-preview:hover {
     background-color: #ff5722;
     color: #ffffff;
+  }
+
+  .mobile-hide {
+    @include respond-to(mobile) {
+      display: none;
+    }
   }
 
 </style>
