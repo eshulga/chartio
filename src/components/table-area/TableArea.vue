@@ -214,6 +214,10 @@ export default {
 
 .application {
   flex-direction: column;
+  background: #fff;
+  &--wrap {
+    min-height: initial;
+  }
 }
 
 .main {
