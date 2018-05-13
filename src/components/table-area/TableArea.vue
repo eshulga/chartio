@@ -2,10 +2,6 @@
   <div class="main">
     <v-app id="inspire">
       <div>
-        <div class="file-input-wrapper">
-          <label for="xlf" class="file-input-button ripple">Загрузить</label>
-          <input type="file" name="xlfile" id="xlf" @change="fileInputHandler">
-        </div>
         <v-dialog v-model="dialog" max-width="500px" class="data-table">
           <v-btn outline :loading="loading" :disabled="loading" slot="activator" class="activator mx-auto" color="deep-orange" @click.native="loader = 'loading'">
             Новая запись
@@ -57,9 +53,12 @@
             <h1>Пожалуйста загрузите .xlsx файл</h1>
           </template>
         </v-data-table>
+        <div class="file-input-wrapper">
+            <label for="xlf" class="file-input-button ripple">Загрузить</label>
+            <input type="file" name="xlfile" id="xlf" @change="fileInputHandler">
+          </div>
       </div>
     </v-app>
-
   </div>
 </template>
 
