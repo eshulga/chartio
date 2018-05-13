@@ -4,6 +4,7 @@
 
 <script>
 import JsPDF from 'jsPDF'
+import html2canvas from 'html2canvas'
 
 export default {
   name: 'DownloadButton',
@@ -13,14 +14,18 @@ export default {
   },
   methods: {
     jsToPdf () {
-      let pdfName = 'test'
-      var doc = new JsPDF()
-      doc.text('Hello World!', 10, 10)
-      doc.save(pdfName + '.pdf')
-      console.log('CLICK!')
+      html2canvas(document.querySelector('.chart-container .valid canvas'))
+        .then(
+          canvas => {
+            let pdfName = 'test'
+            let imgData = canvas.toDataURL('image/png')
+            let doc = new JsPDF('p', 'mm')
+            doc.addImage(imgData, 'PNG', 10, 10)
+            doc.save(pdfName + '.pdf')
+          }
+        )
     }
   }
-
 }
 
 </script>
