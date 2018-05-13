@@ -31,22 +31,22 @@ export default {
         }
       },
       chartData: {
-        labels: ['март', 'апрель'],
+        labels: [],
         datasets: [
           {
-            label: 'GitHub Commits',
-            backgroundColor: ['#fff000', '#f70505'],
-            data: [1000, 12000]
+            label: 'Новый',
+            backgroundColor: [],
+            data: []
           }
         ]
       },
       chartDataLine: {
-        labels: ['март', 'апрель'],
+        labels: [],
         datasets: [
           {
-            label: 'GitHub Commits',
-            backgroundColor: ['#fff000'],
-            data: [1000, 12000]
+            label: 'Новый',
+            backgroundColor: [],
+            data: []
           }
         ]
       }
@@ -86,6 +86,7 @@ export default {
 
       let label = []
       let dataSet = []
+      let datasetCount = 0
 
       arg.labels.forEach(element => {
         label.push(element)
@@ -103,6 +104,7 @@ export default {
       this.chartDataLine.labels = label
       this.chartData.datasets[0].data = dataSet
       this.chartDataLine.datasets[0].data = dataSet
+      this.chartData.datasets[0].label = arg.name
       this.updateColor()
       this.updateData()
     })
