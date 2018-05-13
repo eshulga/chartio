@@ -8,7 +8,7 @@
     <div v-if="isActive" @click="chartPreviewClose" id="element_to_pop_up">
       <div class="container-popup">
         <bar-chart :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
-        <line-chart :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
+        <line-chart :options="options" :chart-data="chartDataLine" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
         <pie-chart :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
         <don-chart :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
       </div>
@@ -101,7 +101,6 @@ export default {
 
       let label = []
       let dataSet = []
-      let datasetCount = 0
 
       arg.labels.forEach(element => {
         label.push(element)
