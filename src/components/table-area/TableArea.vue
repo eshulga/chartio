@@ -27,7 +27,7 @@
           </v-card>
         </v-dialog>
         <v-dialog v-model="dialogColor" max-width="260">
-          <color-picker/>
+          <color-picker :currentId="currentColoringId" />
         </v-dialog>
         <v-data-table
           :headers="headers"
@@ -38,7 +38,7 @@
           <template slot="items" slot-scope="props">
             <td v-for="value in props.item" :key="value">{{ value }}</td>
             <td class="justify-center layout px-0">
-              <v-btn icon flat color="deep-orange" class="mx-0" @click="dialogColor = true">
+              <v-btn icon flat color="deep-orange" class="mx-0" @click="coloringItem(props.index)">
                 <v-icon>color_lens</v-icon>
               </v-btn>
               <v-btn icon flat color="deep-orange" class="mx-0" @click="editItem(props.item)">
@@ -76,7 +76,8 @@ export default {
       rows: [],
       editedIndex: -1,
       editedItem: {},
-      defaultItem: {}
+      defaultItem: {},
+      currentColoringId: null
     }
   },
   computed: {
@@ -153,7 +154,9 @@ export default {
       this.rows = []
     },
     coloringItem(item){
-      console.log('coloringItem', item)
+      this.dialogColor = true
+      this.currentColoringId = item
+      // console.log('coloringItem', item)
     },
     editItem (item) {
       this.editedIndex = this.rows.indexOf(item)
