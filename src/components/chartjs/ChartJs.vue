@@ -144,6 +144,20 @@ export default {
     background-color: white;
     display: flex;
     flex-direction: column;
+
+    @include respond-to(tablet) {
+      margin-left: 0;
+      order: -1;
+      margin-bottom: 10%;
+      width: 100%;
+    }
+
+    @include respond-to(mobile) {
+      margin-left: 0;
+      order: -1;
+      margin-bottom: 10%;
+      width: 100%;
+    }
   }
 
   .valid {
