@@ -13,7 +13,7 @@
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
-                  <v-flex v-for="value in headers" :key="value.id" xs12 sm6 md4>
+                  <v-flex v-for="value in filteredHeader" :key="value.id" xs12 sm6 md4>
                     <v-text-field color="deep-orange" v-model="editedItem[value.value]" :label="value.value">{{value.value}}</v-text-field>
                   </v-flex>
                 </v-layout>
@@ -94,6 +94,9 @@ export default {
     },
     icon () {
       return faCoffee
+    },
+    filteredHeader () {
+      return this.headers.filter(headerCell => headerCell.value)
     }
   },
   watch: {
@@ -154,6 +157,12 @@ export default {
             })
           })
 
+          this.headers.push({
+            text: '',
+            value: '',
+            sortable: false
+          })
+
           for (let i = 1; i < dataSheet.length; i++) {
             let obj = Object.assign({})
             let objDefault = Object.assign({})
@@ -210,13 +219,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .application {
   flex-direction: column;
   background: #fff;
+
   &--wrap {
-    min-height: initial;
+    min-height: 30vh;
   }
 }
 

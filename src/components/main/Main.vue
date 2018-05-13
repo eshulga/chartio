@@ -19,8 +19,8 @@ export default {
   }
 }
 </script>
-<style lang="scss" >
-.main-page{
+<style lang="scss" scoped>
+.main-page {
   display:flex;
   flex-direction: row;
   background-color: #f1f2f2;

@@ -122,7 +122,7 @@ export default {
 <style lang="scss" scoped>
   .chart-container {
    width: 60%;
-    padding: 50px 10px;
+    padding: 150px 10px;
     margin-left:40px;
     box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.15);
     background-color: white;
