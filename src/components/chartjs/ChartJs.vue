@@ -42,8 +42,8 @@ export default {
       this.$refs.DonChart.update()
     },
     changetableColor (color, id) {
-      this.$eventBus['color' + id ] = color
-      this.updateData ()
+      this.$eventBus['color' + id] = color
+      this.updateData()
     }
   },
   mounted () {
@@ -54,17 +54,18 @@ export default {
       arg.data.forEach((element, id, arr) => {
         this.chartData.datasets[id] = {}
         this.chartData.datasets[id].data = [element]
-        const hue = (360/arr.length) * datasetCount
-        const hexColor = hsl(hue , 70, 50)
-        this.chartData.datasets[id].backgroundColor = this.$eventBus['color' + id ] ? this.$eventBus['color' + id ] : hexColor
+        const hue = (360 / arr.length) * datasetCount
+        const hexColor = hsl(hue, 70, 50)
+        this.chartData.datasets[id].backgroundColor = this.$eventBus['color' + id] ? this.$eventBus['color' + id] : hexColor
         datasetCount++
       })
 
       arg.labels.forEach((element, id) => {
-        if ( !this.chartData.datasets[id] ){ this.chartData.datasets[id] = {} } 
+        if (!this.chartData.datasets[id]) {
+          this.chartData.datasets[id] = {}
+        }
         this.chartData.datasets[id].label = element
       })
-
 
       // let label = []
       // let dataSet = []

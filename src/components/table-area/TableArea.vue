@@ -153,7 +153,7 @@ export default {
     initialize () {
       this.rows = []
     },
-    coloringItem(item){
+    coloringItem (item) {
       this.dialogColor = true
       this.currentColoringId = item
       // console.log('coloringItem', item)

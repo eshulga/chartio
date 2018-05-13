@@ -15,7 +15,6 @@ export default {
       activeItem: null
     }
   },
-
   methods: {
     onClick (color, index) {
       this.$eventBus.$emit('close-color-picker')
@@ -24,8 +23,6 @@ export default {
       setTimeout(() => {
         this.activeItem = null
       }, 1000)
-
-      
     }
   }
 }
