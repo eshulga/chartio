@@ -13,7 +13,7 @@
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
-                  <v-flex v-for="value in headers" :key="value" xs12 sm6 md4>
+                  <v-flex v-for="value in headers" :key="value.id" xs12 sm6 md4>
                     <v-text-field v-model="editedItem[value.value]" :label="value.value">{{value.value}}</v-text-field>
                   </v-flex>
                 </v-layout>
@@ -26,6 +26,9 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogColor" max-width="260">
+          <color-picker :currentId="currentColoringId" />
+        </v-dialog>
         <v-data-table
           :headers="headers"
           :items="rows"
@@ -35,11 +38,14 @@
           <template slot="items" slot-scope="props">
             <td v-for="value in props.item" :key="value">{{ value }}</td>
             <td class="justify-center layout px-0">
-              <v-btn icon class="mx-0" @click="editItem(props.item)">
-                <v-icon color="teal">E</v-icon>
+              <v-btn icon flat color="deep-orange" class="mx-0" @click="coloringItem(props.index)">
+                <v-icon>color_lens</v-icon>
               </v-btn>
-              <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                <v-icon color="pink">D</v-icon>
+              <v-btn icon flat color="deep-orange" class="mx-0" @click="editItem(props.item)">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn icon flat color="deep-orange" class="mx-0" @click="deleteItem(props.item)">
+                <v-icon>delete</v-icon>
               </v-btn>
             </td>
           </template>
@@ -54,18 +60,24 @@
 
 <script>
 import XLSX from 'xlsx'
+import ColorPicker from '@/common/color-picker/ColorPicker.vue'
 
 export default {
   name: 'TableArea',
+  components: {
+    ColorPicker
+  },
   data () {
     return {
       name: '',
       dialog: false,
+      dialogColor: false,
       headers: [],
       rows: [],
       editedIndex: -1,
       editedItem: {},
-      defaultItem: {}
+      defaultItem: {},
+      currentColoringId: null
     }
   },
   computed: {
@@ -97,6 +109,10 @@ export default {
 
   created () {
     this.initialize()
+  },
+
+  mounted () {
+    this.$eventBus.$on('close-color-picker', this.closeColorPicker)
   },
 
   methods: {
@@ -137,6 +153,11 @@ export default {
     initialize () {
       this.rows = []
     },
+    coloringItem(item){
+      this.dialogColor = true
+      this.currentColoringId = item
+      // console.log('coloringItem', item)
+    },
     editItem (item) {
       this.editedIndex = this.rows.indexOf(item)
       this.editedItem = Object.assign({}, item)
@@ -153,6 +174,11 @@ export default {
         this.editedIndex = -1
       }, 300)
     },
+    closeColorPicker () {
+      setTimeout(() => {
+        this.dialogColor = false
+      }, 300)
+    },
     save () {
       if (this.editedIndex > -1) {
         Object.assign(this.rows[this.editedIndex], this.editedItem)
@@ -167,6 +193,7 @@ export default {
 
 <style lang="scss" scoped>
   .main{
+    position: relative;
     display:flex;
     flex-direction: column;
     background-color: white;
@@ -174,5 +201,8 @@ export default {
     box-shadow: -5px 6px 16.8px 4.2px rgba(0, 0, 0, 0.15);
     border: 2px solid #3F92D2;
     margin-bottom: 40px;
+    .color-picker{
+      position: absolute;
+    }
   }
 </style>

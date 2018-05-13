@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import hsl from 'hsl-to-hex'
 import BarChart from '../../common/charjs/BarChart.vue'
 import LineChart from '../../common/charjs/LineChart.vue'
 import PieChart from '../../common/charjs/PieChart.vue'
@@ -19,7 +20,7 @@ export default {
       render: true,
       currentChart: 'bar',
       chartData: {
-        labels: ['март', 'апрель'],
+        // labels: ['март', 'апрель'],
         datasets: [
           {
             label: 'GitHub Commits',
@@ -39,25 +40,45 @@ export default {
       this.$refs.LineChart.update()
       this.$refs.PieChart.update()
       this.$refs.DonChart.update()
+    },
+    changetableColor (color, id) {
+      this.$eventBus['color' + id ] = color
+      this.updateData ()
     }
   },
   mounted () {
     this.$eventBus.$on('chartData', (arg) => {
       this.render = false
 
-      let label = []
-      let dataSet = []
-
-      arg.labels.forEach(element => {
-        label.push(element)
+      let datasetCount = 0
+      arg.data.forEach((element, id, arr) => {
+        this.chartData.datasets[id] = {}
+        this.chartData.datasets[id].data = [element]
+        const hue = (360/arr.length) * datasetCount
+        const hexColor = hsl(hue , 70, 50)
+        this.chartData.datasets[id].backgroundColor = this.$eventBus['color' + id ] ? this.$eventBus['color' + id ] : hexColor
+        datasetCount++
       })
 
-      arg.data.forEach(element => {
-        dataSet.push(element)
+      arg.labels.forEach((element, id) => {
+        if ( !this.chartData.datasets[id] ){ this.chartData.datasets[id] = {} } 
+        this.chartData.datasets[id].label = element
       })
 
-      this.chartData.labels = label
-      this.chartData.datasets[0].data = dataSet
+
+      // let label = []
+      // let dataSet = []
+
+      // arg.labels.forEach(element => {
+      //   label.push(element)
+      // })
+
+      // arg.data.forEach(element => {
+      //   dataSet.push(element)
+      // })
+
+      // this.chartData.labels = label
+      // this.chartData.datasets[0].data = dataSet
 
       this.updateData()
     })
@@ -65,6 +86,8 @@ export default {
     this.$eventBus.$on('toggleCharts', (args) => {
       this.currentChart = args
     })
+
+    this.$eventBus.$on('data-color-picker', this.changetableColor)
   },
   beforeUpdate () {
 
