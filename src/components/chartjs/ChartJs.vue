@@ -1,10 +1,10 @@
 <template>
   <div class="chart-container">
+    <button class="button-preview ripple" @click="chartPreview" ><v-icon>fullscreen</v-icon>Full Screen</button>
     <bar-chart ref="BarChart" :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
     <line-chart ref="LineChart" :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
     <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
     <don-chart ref="DonChart" :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
-    <button class="button-preview" @click="chartPreview" >Full Screen</button>
     <div v-if="isActive" @click="chartPreviewClose" id="element_to_pop_up">
       <div class="container-popup">
         <bar-chart ref="BarChart" :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
@@ -138,10 +138,12 @@ export default {
 <style lang="scss" scoped>
   .chart-container {
    width: 60%;
-    padding: 150px 10px;
+    padding: 10px 10px;
     margin-left:40px;
     box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.15);
     background-color: white;
+    display: flex;
+    flex-direction: column;
   }
 
   .valid {
@@ -169,13 +171,23 @@ export default {
     right: 20%;
     bottom: 20%;
     background-color: rgba(250, 250, 250, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .button-preview {
     padding: 10px 20px;
     margin-left: 5%;
-    margin-top: 10%;
+    margin-top: 3%;
     border: 1px solid silver;
+    border-radius: 10px;
+    align-self: flex-end;
+  }
+
+  .button-preview:hover {
+    background-color: #ff5722;
+    color: #ffffff;
   }
 
 </style>

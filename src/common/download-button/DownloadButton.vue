@@ -19,7 +19,7 @@ export default {
           canvas => {
             let pdfName = 'test'
             let imgData = canvas.toDataURL('image/png')
-            let doc = new JsPDF('p', 'mm')
+            let doc = new JsPDF('l', 'mm')
             doc.addImage(imgData, 'PNG', 10, 10)
             doc.save(pdfName + '.pdf')
           }
@@ -34,7 +34,7 @@ export default {
 .button-pdf {
     width: 220px;
     height: 60px;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #ff5722;
     font-family: 'Roboto', sans-serif;
     text-align: center;
