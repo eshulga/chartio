@@ -1,15 +1,9 @@
 <template>
   <div class="main">
-    <h1>{{ name }}</h1>
-    <!-- <input type="file" name="xlfile" id="xlf" @change="fileInputHandler"> -->
     <v-app id="inspire">
       <div>
-        <div class="file-input-wrapper">
-          <label for="xlf" class="file-input-button ripple">Загрузить</label>
-          <input type="file" name="xlfile" id="xlf" @change="fileInputHandler">
-        </div>
         <v-dialog v-model="dialog" max-width="500px" class="data-table">
-          <v-btn outline :loading="loading" :disabled="loading" slot="activator" class="activator" color="deep-orange" @click.native="loader = 'loading'">
+          <v-btn v-if="rows.length > 0" outline :loading="loading" :disabled="loading" slot="activator" class="activator mx-auto" color="deep-orange" @click.native="loader = 'loading'">
             Новая запись
           </v-btn>
           <v-card>
@@ -19,8 +13,8 @@
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
-                  <v-flex v-for="value in headers" :key="value.id" xs12 sm6 md4>
-                    <v-text-field v-model="editedItem[value.value]" :label="value.value">{{value.value}}</v-text-field>
+                  <v-flex v-for="value in filteredHeader" :key="value.id" xs12 sm6 md4>
+                    <v-text-field color="deep-orange" v-model="editedItem[value.value]" :label="value.value">{{value.value}}</v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -59,9 +53,12 @@
             <h1>Пожалуйста загрузите .xlsx файл</h1>
           </template>
         </v-data-table>
+        <div class="file-input-wrapper">
+            <label for="xlf" class="file-input-button ripple">Загрузить</label>
+            <input type="file" name="xlfile" id="xlf" @change="fileInputHandler">
+          </div>
       </div>
     </v-app>
-
   </div>
 </template>
 
@@ -86,7 +83,9 @@ export default {
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
-      currentColoringId: null
+      currentColoringId: null,
+      fileName: '',
+      loading: null
     }
   },
   computed: {
@@ -95,6 +94,9 @@ export default {
     },
     icon () {
       return faCoffee
+    },
+    filteredHeader () {
+      return this.headers.filter(headerCell => headerCell.value)
     }
   },
   watch: {
@@ -112,7 +114,8 @@ export default {
   beforeUpdate () {
     const chartData = {
       labels: [],
-      data: []
+      data: [],
+      name: ''
     }
 
     this.rows.forEach((item) => {
@@ -120,6 +123,8 @@ export default {
       chartData.labels.push(item[keys[0]])
       chartData.data.push(item[keys[1]])
     })
+
+    chartData.name = this.name
 
     this.$eventBus.$emit('chartData', chartData)
   },
@@ -152,6 +157,12 @@ export default {
             })
           })
 
+          this.headers.push({
+            text: '',
+            value: '',
+            sortable: false
+          })
+
           for (let i = 1; i < dataSheet.length; i++) {
             let obj = Object.assign({})
             let objDefault = Object.assign({})
@@ -174,7 +185,6 @@ export default {
     coloringItem (item) {
       this.dialogColor = true
       this.currentColoringId = item
-      // console.log('coloringItem', item)
     },
     editItem (item) {
       this.editedIndex = this.rows.indexOf(item)
@@ -209,83 +219,97 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .main{
-    position: relative;
-    display:flex;
-    flex-direction: column;
-    background-color: white;
-    width: 100%;
-    height: auto;
-    box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.15);
-    margin-bottom: 40px;
-    .color-picker{
-      position: absolute;
-    }
-  }
+<style lang="scss">
 
-  .file-input-wrapper {
-    display: flex;
-    flex-direction: row;
-    .file-input-button {
-      color: #ff5722;
-      border: 1px solid #ff5722;
-      background: #fff;
-      border-radius: 2px;
-      cursor: pointer;
-      box-sizing: border-box;
-      font-family: "Roboto", sans-serif;
-      width: 120px;
-      height: 40px;
-      font-size: 15px;
-      font-weight: 400;
-      margin-top: 20px;
-      padding-top: 8px;
-      text-align: center;
-      &:hover {
-        transition: .3s cubic-bezier(.25,.8,.5,1);
-        background: rgba(#ff5722, 0.12);
-      }
-    }
-    input {
-      display: none;
-    }
-  }
+.application {
+  flex-direction: column;
+  background: #fff;
 
-  .no-data {
+  &--wrap {
+    min-height: 30vh;
+  }
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 100%;
+  height: auto;
+  box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  .color-picker {
+    position: absolute;
+  }
+}
+
+.file-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  .file-input-button {
+    color: #ff5722;
+    border: 1px dashed #ff5722;
+    background: #fff;
+    border-radius: 2px;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     font-family: "Roboto", sans-serif;
+    width: 100%;
+    height: 75px;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 20px;
+    padding-top: 25px;
+    text-align: center;
     &:hover {
-      background: #fff;
+      transition: .3s cubic-bezier(.25, .8, .5, 1);
+      background: rgba(#ff5722, 0.12);
     }
   }
-
-  .data-table__new-data {
-      color: white;
-      border: none;
-      background: #ff5722;
-      border-radius: 2px;
-      cursor: pointer;
-      box-sizing: border-box;
-      font-family: "Roboto", sans-serif;
-      width: 120px;
-      height: 35px;
-      font-size: 15px;
-      font-weight: 400;
-      margin-top: 20px;
-      // padding-top: 9px;
-      text-align: center;
+  input {
+    display: none;
   }
+}
 
-  .activator {
-    margin: 10px 0;
-    text-transform: none;
+.no-data {
+  font-family: "Roboto", sans-serif;
+  &:hover {
+    background: #fff;
   }
+}
 
-  .ripple {
+.data-table__new-data {
+  // color: white;
+  border: none;
+  background: #ff5722;
+  border-radius: 2px;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  width: 120px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 20px; // padding-top: 9px;
+  text-align: center;
+}
+
+#inspire {
+  padding: 10px;
+}
+
+.activator {
+  margin: 10px 15px;
+  text-transform: none;
+}
+
+.ripple {
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
-
   &:after {
     content: "";
     display: block;
@@ -298,52 +322,56 @@ export default {
     background-image: radial-gradient(circle, #ff5722 10%, transparent 10.01%);
     background-repeat: no-repeat;
     background-position: 50%;
-    transform: scale(10,10);
+    transform: scale(10, 10);
     opacity: 0;
     transition: transform .5s, opacity 1s;
   }
-
   &:active:after {
-    transform: scale(0,0);
+    transform: scale(0, 0);
     opacity: .2;
     transition: 0s;
   }
 }
 
 .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
+  animation: loader 1s infinite;
+  display: flex;
+}
+
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
   }
-  @-moz-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
   }
-  @-webkit-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
   }
-  @-o-keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
   }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 </style>
