@@ -35,6 +35,16 @@ export default {
         datasets: [
           {
             label: 'GitHub Commits',
+            backgroundColor: ['#fff000', '#f70505'],
+            data: [1000, 12000]
+          }
+        ]
+      },
+      chartDataLine: {
+        labels: ['март', 'апрель'],
+        datasets: [
+          {
+            label: 'GitHub Commits',
             backgroundColor: ['#fff000'],
             data: [1000, 12000]
           }
@@ -55,6 +65,19 @@ export default {
     changetableColor (color, id) {
       this.$eventBus['color' + id] = color
       this.updateData()
+    },
+    updateColor () {
+      let datasetCount = 0
+      this.chartData.datasets[0].data.forEach((element, id, arr) => {
+        const hue = (360 / arr.length) * datasetCount
+        const hexColor = hsl(hue, 70, 50)
+
+        this.chartData.datasets[0].backgroundColor[id] = this.$eventBus['color' + id] ? this.$eventBus['color' + id] : hexColor
+        datasetCount++
+      })
+    },
+    changeChart (args) {
+      this.currentChart = args
     }
   },
   mounted () {
@@ -67,7 +90,7 @@ export default {
       arg.labels.forEach(element => {
         label.push(element)
       })
-      let datasetCount = 0
+
       arg.data.forEach((element, id, arr) => {
         dataSet.push(element)
         const hue = (360 / arr.length) * datasetCount
@@ -77,14 +100,14 @@ export default {
       })
 
       this.chartData.labels = label
+      this.chartDataLine.labels = label
       this.chartData.datasets[0].data = dataSet
-
+      this.chartDataLine.datasets[0].data = dataSet
+      this.updateColor()
       this.updateData()
     })
 
-    this.$eventBus.$on('toggleCharts', (args) => {
-      this.currentChart = args
-    })
+    this.$eventBus.$on('toggleCharts', this.changeChart)
 
     this.$eventBus.$on('data-color-picker', this.changetableColor)
   },

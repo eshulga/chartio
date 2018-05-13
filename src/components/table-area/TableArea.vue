@@ -83,7 +83,8 @@ export default {
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
-      currentColoringId: null
+      currentColoringId: null,
+      loading: null
     }
   },
   computed: {
@@ -171,7 +172,6 @@ export default {
     coloringItem (item) {
       this.dialogColor = true
       this.currentColoringId = item
-      // console.log('coloringItem', item)
     },
     editItem (item) {
       this.editedIndex = this.rows.indexOf(item)
