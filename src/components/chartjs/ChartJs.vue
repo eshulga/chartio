@@ -1,16 +1,16 @@
 <template>
   <div class="chart-container">
-    <button class="button-preview ripple" @click="chartPreview" ><v-icon>fullscreen</v-icon>Full Screen</button>
+    <button class="button-preview ripple" @click="chartPreview" ><v-icon>fullscreen</v-icon><span class="mobile-hide">Full Screen</span></button>
     <bar-chart ref="BarChart" :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
     <line-chart ref="LineChart" :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
     <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
     <don-chart ref="DonChart" :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
     <div v-if="isActive" @click="chartPreviewClose" id="element_to_pop_up">
       <div class="container-popup">
-        <bar-chart ref="BarChart" :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
-        <line-chart ref="LineChart" :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
-        <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
-        <don-chart ref="DonChart" :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
+        <bar-chart :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
+        <line-chart :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
+        <pie-chart :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
+        <don-chart :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
       </div>
     </div>
   </div>
@@ -144,6 +144,20 @@ export default {
     background-color: white;
     display: flex;
     flex-direction: column;
+
+    @include respond-to(tablet) {
+      margin-left: 0;
+      order: -1;
+      margin-bottom: 10%;
+      width: 100%;
+    }
+
+    @include respond-to(mobile) {
+      margin-left: 0;
+      order: -1;
+      margin-bottom: 10%;
+      width: 100%;
+    }
   }
 
   .valid {
@@ -188,6 +202,12 @@ export default {
   .button-preview:hover {
     background-color: #ff5722;
     color: #ffffff;
+  }
+
+  .mobile-hide {
+    @include respond-to(mobile) {
+      display: none;
+    }
   }
 
 </style>

@@ -1,13 +1,13 @@
 <template>
     <div class="row">
         <button class="ripple" @click="clicked" data-type="bar">
-        <font-awesome-icon icon="chart-bar" size="3x"/>Bar chart</button>
+        <font-awesome-icon class="text-svg" icon="chart-bar" size="3x"/><span class="text-button">Bar chart</span></button>
         <button class="ripple" @click="clicked" data-type="line">
-        <font-awesome-icon icon="chart-line" size="3x"/>Line chart</button>
+        <font-awesome-icon class="text-svg" icon="chart-line" size="3x"/><span class="text-button">Line chart</span></button>
         <button class="ripple" @click="clicked" data-type="pie">
-        <font-awesome-icon icon="chart-pie" size="3x"/>Pie chart</button>
+        <font-awesome-icon class="text-svg" icon="chart-pie" size="3x"/><span class="text-button">Pie chart</span></button>
         <button class="ripple" @click="clicked" data-type="don">
-        <font-awesome-icon icon="chart-area" size="3x"/>Donut chart</button>
+        <font-awesome-icon class="text-svg" icon="chart-area" size="3x"/><span class="text-button">Donut chart</span></button>
     </div>
 </template>
 
@@ -64,6 +64,10 @@ export default {
   display: flex;
   flex-direction: row;
   width: 100%;
+  box-shadow: -5px 5px 15px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  border-radius: 20px;
+
   button {
     display: flex;
     border: 1px solid #ff5722;
@@ -77,7 +81,7 @@ export default {
     color: #757575;
     font-size: 16px;
     padding: 0 10px;
-    margin-bottom: 40px;
+    width: 25%;
     svg {
       margin: 0 10px;
       color: #ff5722;
@@ -133,6 +137,20 @@ export default {
     transform: scale(0,0);
     opacity: .2;
     transition: 0s;
+  }
+}
+
+.text-button {
+
+  @include respond-to(mobile) {
+    display: none;
+  }
+}
+
+.text-svg {
+
+  @include respond-to(mobile) {
+    font-size: 2em;
   }
 }
 
