@@ -50,32 +50,38 @@ export default {
     this.$eventBus.$on('chartData', (arg) => {
       this.render = false
 
-      let datasetCount = 0
-      arg.data.forEach((element, id, arr) => {
-        this.chartData.datasets[id] = {}
-        this.chartData.datasets[id].data = [element]
-        const hue = (360 / arr.length) * datasetCount
-        const hexColor = hsl(hue, 70, 50)
-        this.chartData.datasets[id].backgroundColor = this.$eventBus['color' + id] ? this.$eventBus['color' + id] : hexColor
-        datasetCount++
-      })
+      // let datasetCount = 0
+      // arg.data.forEach((element, id, arr) => {
+      //   this.chartData.datasets[id] = {}
+      //   this.chartData.datasets[id].data = [element]
+      //   const hue = (360 / arr.length) * datasetCount
+      //   const hexColor = hsl(hue, 70, 50)
+      //   this.chartData.datasets[id].backgroundColor = this.$eventBus['color' + id] ? this.$eventBus['color' + id] : hexColor
+      //   datasetCount++
+      // })
 
-      arg.labels.forEach((element, id) => {
-        if (!this.chartData.datasets[id]) {
-          this.chartData.datasets[id] = {}
-        }
-        this.chartData.datasets[id].label = element
-      })
+      // arg.labels.forEach((element, id) => {
+      //   if (!this.chartData.datasets[id]) {
+      //     this.chartData.datasets[id] = {}
+      //   }
+      //   this.chartData.datasets[id].label = element
+      // })
 
       let label = []
       let dataSet = []
+      // let colorSet = []
 
       arg.labels.forEach(element => {
         label.push(element)
       })
-
-      arg.data.forEach(element => {
+      let datasetCount = 0
+      arg.data.forEach((element, id, arr) => {
         dataSet.push(element)
+        const hue = (360 / arr.length) * datasetCount
+        const hexColor = hsl(hue, 70, 50)
+        // colorSet.push(hexColor)
+        this.chartData.datasets[0].backgroundColor[id] = this.$eventBus['color' + id] ? this.$eventBus['color' + id] : hexColor
+        datasetCount++
       })
 
       this.chartData.labels = label
