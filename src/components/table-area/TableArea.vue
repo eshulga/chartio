@@ -174,7 +174,6 @@ export default {
     coloringItem (item) {
       this.dialogColor = true
       this.currentColoringId = item
-      // console.log('coloringItem', item)
     },
     editItem (item) {
       this.editedIndex = this.rows.indexOf(item)
