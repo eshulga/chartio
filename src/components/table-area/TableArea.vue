@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1>Table-area</h1>
+    <h1>{{ name }}</h1>
     <input type="file" name="xlfile" id="xlf" @change="fileInputHandler">
     <v-app id="inspire">
       <div>
@@ -59,6 +59,7 @@ export default {
   name: 'TableArea',
   data () {
     return {
+      name: '',
       dialog: false,
       headers: [],
       rows: [],
@@ -79,21 +80,36 @@ export default {
     }
   },
 
+  beforeUpdate () {
+    const chartData = {
+      labels: [],
+      data: []
+    }
+
+    this.rows.forEach((item) => {
+      let keys = Object.keys(item)
+      chartData.labels.push(item[keys[0]])
+      chartData.data.push(item[keys[1]])
+    })
+
+    this.$eventBus.$emit('chartData', chartData)
+  },
+
   created () {
     this.initialize()
   },
 
   methods: {
     fileInputHandler (e) {
-      var files = e.target.files
+      const files = e.target.files
       for (let i = 0, f = files[i]; i !== files.length; ++i) {
         var reader = new FileReader()
-        // var name = f.name
+        this.name = f.name
         reader.onload = (e) => {
-          var data = e.target.result
-          var workbook = XLSX.read(data, {type: 'binary'})
-          var firstWorksheet = workbook.Sheets[workbook.SheetNames[0]]
-          var dataSheet = XLSX.utils.sheet_to_json(firstWorksheet, {header: 1})
+          const data = e.target.result
+          const workbook = XLSX.read(data, {type: 'binary'})
+          const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]]
+          const dataSheet = XLSX.utils.sheet_to_json(firstWorksheet, {header: 1})
           // adding headers
           dataSheet[0].forEach((header) => {
             this.headers.push({
@@ -122,7 +138,6 @@ export default {
       this.rows = []
     },
     editItem (item) {
-      console.dir(item)
       this.editedIndex = this.rows.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
