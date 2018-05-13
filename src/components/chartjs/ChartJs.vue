@@ -4,6 +4,15 @@
     <line-chart ref="LineChart" :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
     <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
     <don-chart ref="DonChart" :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
+    <button class="button-preview" @click="chartPreview" >Full Screen</button>
+    <div v-if="isActive" @click="chartPreviewClose" id="element_to_pop_up">
+      <div class="container-popup">
+        <bar-chart ref="BarChart" :options="options" :chart-data="chartData" :class="currentChart === 'bar' ? 'valid' : 'invalid'" :height="200" />
+        <line-chart ref="LineChart" :options="options" :chart-data="chartData" :class="currentChart === 'line' ? 'valid' : 'invalid'" :height="200" />
+        <pie-chart ref="PieChart" :chart-data="chartData" :class="currentChart === 'pie' ? 'valid' : 'invalid'" :height="200" />
+        <don-chart ref="DonChart" :chart-data="chartData"   :class="currentChart === 'don' ? 'valid' : 'invalid'" :height="200" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,6 +26,7 @@ import DonChart from '../../common/charjs/DoughuntChart.vue'
 export default {
   data () {
     return {
+      isActive: false,
       render: true,
       currentChart: 'bar',
       options: {
@@ -56,6 +66,12 @@ export default {
     BarChart, LineChart, PieChart, DonChart
   },
   methods: {
+    chartPreview () {
+      this.isActive = true
+    },
+    chartPreviewClose () {
+      this.isActive = false
+    },
     updateData () {
       this.$refs.BarChart.update()
       this.$refs.LineChart.update()
@@ -133,6 +149,32 @@ export default {
 
   .invalid {
     display: none;
+  }
+
+  #element_to_pop_up {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+
+  .container-popup {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    right: 20%;
+    bottom: 20%;
+    background-color: rgba(250, 250, 250, 0.8);
+  }
+
+  .button-preview {
+    padding: 10px 20px;
+    margin-left: 5%;
+    margin-top: 10%;
+    border: 1px solid silver;
   }
 
 </style>
