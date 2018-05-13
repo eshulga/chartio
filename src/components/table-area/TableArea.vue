@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <h1>{{ name }}</h1>
-    <input type="file" name="xlfile" id="xlf" @change="fileInputHandler">
+    <!-- <input type="file" name="xlfile" id="xlf" @change="fileInputHandler"> -->
     <v-app id="inspire">
       <div>
         <div class="file-input-wrapper">
@@ -144,6 +144,7 @@ export default {
           const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]]
           const dataSheet = XLSX.utils.sheet_to_json(firstWorksheet, {header: 1})
           // adding headers
+
           dataSheet[0].forEach((header) => {
             this.headers.push({
               text: '' + header,
@@ -168,7 +169,7 @@ export default {
       }
     },
     initialize () {
-      this.rows = []
+      // this.rows = []
     },
     coloringItem (item) {
       this.dialogColor = true

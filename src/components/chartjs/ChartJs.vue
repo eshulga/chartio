@@ -20,11 +20,11 @@ export default {
       render: true,
       currentChart: 'bar',
       chartData: {
-        // labels: ['март', 'апрель'],
+        labels: ['март', 'апрель'],
         datasets: [
           {
             label: 'GitHub Commits',
-            backgroundColor: '#fff000',
+            backgroundColor: ['#fff000'],
             data: [1000, 12000]
           }
         ]
@@ -67,19 +67,19 @@ export default {
         this.chartData.datasets[id].label = element
       })
 
-      // let label = []
-      // let dataSet = []
+      let label = []
+      let dataSet = []
 
-      // arg.labels.forEach(element => {
-      //   label.push(element)
-      // })
+      arg.labels.forEach(element => {
+        label.push(element)
+      })
 
-      // arg.data.forEach(element => {
-      //   dataSet.push(element)
-      // })
+      arg.data.forEach(element => {
+        dataSet.push(element)
+      })
 
-      // this.chartData.labels = label
-      // this.chartData.datasets[0].data = dataSet
+      this.chartData.labels = label
+      this.chartData.datasets[0].data = dataSet
 
       this.updateData()
     })
