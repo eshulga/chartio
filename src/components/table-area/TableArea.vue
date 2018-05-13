@@ -86,7 +86,8 @@ export default {
       editedIndex: -1,
       editedItem: {},
       defaultItem: {},
-      currentColoringId: null
+      currentColoringId: null,
+      loading: null
     }
   },
   computed: {
