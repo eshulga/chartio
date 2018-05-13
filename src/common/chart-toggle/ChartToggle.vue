@@ -63,12 +63,11 @@ export default {
 .row {
   display: flex;
   flex-direction: row;
+  width: 100%;
   button {
     display: flex;
-    border: 2px solid #ff5722;
+    border: 1px solid #ff5722;
     height: 75px;
-    max-width: 130px;
-    width: 100%;
     background: #fff;
     outline: none;
     cursor: pointer;
