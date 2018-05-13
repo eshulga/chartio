@@ -24,7 +24,7 @@ export default {
         datasets: [
           {
             label: 'GitHub Commits',
-            backgroundColor: ['#fff000'],
+            backgroundColor: ['#fff000', '#f70505'],
             data: [1000, 12000]
           }
         ]
