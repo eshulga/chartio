@@ -71,8 +71,6 @@ export default {
     display: flex;
     border: 1px solid #ff5722;
     height: 75px;
-    max-width: 130px;
-    width: 100%;
     background: #fff;
     outline: none;
     cursor: pointer;
